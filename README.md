@@ -62,8 +62,18 @@ chap 二层保护
 
 编译时makefile会要求输入password， 客户端和服务端必须密码一致，用于报文确认。random 用于防止重放攻击。
 
-1、发送broadcast报文， 生成broadcast `random0`
-2、ap接收到broadcast报文, 生成`random1`, 对`数据+ random0 + password`计算`md5sum1`, 发送ap reg 报文。
-3、ac收到ap reg报文，提取`md5sum1`并置原报文位置为0, 对`报文 + random0 + password`计算`md5sum2`, 如果md5sum1 与 md5sum2 不一致，则丢弃。ac 生成reg response 报文，生成`random2`, 对`数据 + random1 + password`计算`md5sum3`
-4、ap 收到reg response 报文，提取`md5sum3`并置原报文位置为0, 对`报文 + random1 + password`计算`md5sum3`, 如果md5sum3 与 md5sum4 不一致，则丢弃
+1. 发送broadcast报文， 
+  > 生成broadcast `random0`
+2. ap接收到broadcast报文, 
+  > 生成`random1`, 
+  > 对`数据+ random0 + password`计算`md5sum1`, 发送ap reg 报文。
+3. ac收到ap reg报文，
+  > 提取`md5sum1`并置原报文位置为0, 
+  > 对`报文 + random0 + password`计算`md5sum2`, 如果md5sum1 与 md5sum2 不一致，则丢弃。
+  > ac 生成reg response 报文，
+  > 生成`random2`, 
+  > 对`数据 + random1 + password`计算`md5sum3`
+4. ap 收到reg response 报文，
+  > 提取`md5sum3`并置原报文位置为0, 
+  > 对`报文 + random1 + password`计算`md5sum3`, 如果md5sum3 与 md5sum4 不一致，则丢弃
 
